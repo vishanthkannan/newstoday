@@ -112,7 +112,8 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8 h-16">
+          <div className="hidden lg:flex items-center space-x-8 h-16 overflow-x-auto">
+
             {/* Categories */}
             <nav className="flex items-center space-x-1">
               {categories.map((category) => (
