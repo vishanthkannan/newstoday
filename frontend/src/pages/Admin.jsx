@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Users, Star, BarChart3, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('users');
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState(null);
+  const [commandEmail, setCommandEmail] = useState('');
+  const [commandMsg, setCommandMsg] = useState('');
 
   const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const { user } = useAuth();
 
 
   useEffect(() => {
     if (activeTab === 'users') {
       fetchUsers();
     }
+    // fetch stats when component mounts or tab changes
+    fetchStats();
   }, [activeTab]);
 
   const fetchUsers = async () => {
@@ -26,6 +33,62 @@ const Admin = () => {
       console.error('Error fetching users:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchStats = async () => {
+    try {
+      // public stats endpoint (safe to expose on production)
+      const response = await axios.get(`${API_BASE_URL}/public/stats`);
+      setStats(response.data);
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+      setStats(null);
+    }
+  };
+
+  const promoteByEmail = async () => {
+    setCommandMsg('');
+    if (!commandEmail) return setCommandMsg('Enter an email');
+    try {
+      // search user by email
+      const searchRes = await axios.get(`${API_BASE_URL}/admin/users?search=${encodeURIComponent(commandEmail)}&limit=1`);
+      const foundUsers = searchRes.data.users || searchRes.data || [];
+      const userToPromote = Array.isArray(foundUsers) ? foundUsers[0] : foundUsers;
+      if (!userToPromote || !userToPromote._id) {
+        setCommandMsg('User not found');
+        return;
+      }
+
+      await axios.put(`${API_BASE_URL}/admin/users/${userToPromote._id}/role`, { role: 'admin' });
+      setCommandMsg('User promoted to admin');
+      fetchUsers();
+      fetchStats();
+    } catch (err) {
+      console.error(err);
+      setCommandMsg(err.response?.data?.message || 'Promotion failed');
+    }
+  };
+
+  const exportUsersCSV = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/admin/users?limit=1000`);
+      const list = res.data.users || res.data || [];
+      const rows = [
+        ['id', 'name', 'email', 'role', 'country', 'preferredCategories'].join(','),
+        ...list.map(u => [u._id, `"${u.name}"`, u.email, u.role, u.country || '', `"${(u.preferredCategories||[]).join('|')}"`].join(','))
+      ].join('\n');
+
+      const blob = new Blob([rows], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'users.csv';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export failed', err);
+      setCommandMsg('Export failed');
     }
   };
 
@@ -45,6 +108,45 @@ const Admin = () => {
             Manage users and platform settings
           </p>
         </motion.div>
+
+        {/* Summary and Commands */}
+        <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="flex items-center gap-6">
+            <div className="bg-dark-200/50 p-4 rounded-lg">
+              <p className="text-sm text-gray-400">Total Users</p>
+              <p className="text-2xl font-bold text-white">{stats ? stats.totalUsers : '-'}</p>
+            </div>
+            <div className="bg-dark-200/50 p-4 rounded-lg">
+              <p className="text-sm text-gray-400">Admin Users</p>
+              <p className="text-2xl font-bold text-white">{stats ? stats.adminUsers : '-'}</p>
+            </div>
+            <div className="bg-dark-200/50 p-4 rounded-lg">
+              <p className="text-sm text-gray-400">Regular Users</p>
+              <p className="text-2xl font-bold text-white">{stats ? stats.regularUsers : '-'}</p>
+            </div>
+          </div>
+
+          <div className="bg-dark-200/50 p-4 rounded-lg w-full md:w-auto">
+            <p className="text-sm text-gray-400 mb-2">Commands</p>
+            {!user || user.role !== 'admin' ? (
+              <p className="text-sm text-gray-400">Admin commands hidden. Log in as an admin to run commands.</p>
+            ) : (
+              <>
+                <div className="flex gap-2 items-center">
+                  <input
+                    value={commandEmail}
+                    onChange={(e) => setCommandEmail(e.target.value)}
+                    placeholder="user@example.com"
+                    className="px-3 py-2 rounded-md bg-white/5 text-sm text-white w-full md:w-64"
+                  />
+                  <button onClick={promoteByEmail} className="px-3 py-2 bg-primary-600 rounded-md text-sm font-semibold">Promote</button>
+                  <button onClick={exportUsersCSV} className="px-3 py-2 bg-gray-700 rounded-md text-sm">Export</button>
+                </div>
+                {commandMsg && <p className="text-sm text-gray-400 mt-2">{commandMsg}</p>}
+              </>
+            )}
+          </div>
+        </div>
 
         {/* Tabs */}
         <motion.div 

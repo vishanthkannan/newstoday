@@ -12,6 +12,7 @@ const bookmarkRoutes = require('./routes/bookmarks');
 const adminRoutes = require('./routes/admin');
 const likeRoutes = require('./routes/likes');
 const commentRoutes = require('./routes/comments');
+const publicRoutes = require('./routes/public');
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/likes', likeRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/public', publicRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
