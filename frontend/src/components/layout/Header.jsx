@@ -97,11 +97,11 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-3 group h-16">
             <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-accent-500 rounded-xl flex items-center justify-center group-hover:animate-pulse-glow transition-all shadow-lg">
               <span className="font-bold text-white text-2xl">N</span>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center">
               <span className="font-bold text-2xl text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                 NewsFlow
               </span>
@@ -112,7 +112,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 h-16">
             {/* Categories */}
             <nav className="flex items-center space-x-1">
               {categories.map((category) => (
@@ -157,7 +157,7 @@ const Header = () => {
           </div>
 
           {/* User Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 h-16">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -239,7 +239,7 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
+              className="lg:hidden p-2 rounded-md text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors h-10 flex items-center justify-center"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
