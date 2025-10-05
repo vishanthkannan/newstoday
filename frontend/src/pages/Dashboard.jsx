@@ -133,7 +133,7 @@ const Dashboard = () => {
               <div className="mb-6">
                 <h2 className="text-xl font-semibold text-white mb-2">Your Personalized News Feed</h2>
                 <p className="text-gray-400">
-                  Based on your preferred categories: {preferences.preferredCategories.join(', ')}
+                  Based on you preferred categories: {preferences.preferredCategories.join(', ')}
                 </p>
               </div>
               <NewsGrid articles={articles} loading={loading} bookmarks={bookmarks} />
