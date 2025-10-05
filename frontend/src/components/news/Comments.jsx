@@ -14,7 +14,8 @@ const Comments = ({ articleURL, articleTitle }) => {
   const [editingComment, setEditingComment] = useState(null);
   const [editContent, setEditContent] = useState('');
 
-  const API_BASE_URL = 'http://localhost:5001/api';
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     if (articleURL) {

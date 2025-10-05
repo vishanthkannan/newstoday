@@ -15,7 +15,8 @@ const NewsCardWithComments = ({ article, isBookmarked = false, bookmarkId = null
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:5001/api';
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     let isMounted = true;
