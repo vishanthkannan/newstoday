@@ -119,7 +119,7 @@ const NewsCard = ({ article, isBookmarked = false, bookmarkId = null }) => {
           </div>
           
           <div className="flex items-center space-x-1 text-primary-400 group-hover:text-primary-300 transition-colors">
-            <span>Read more</span>
+            <span>Read more more</span>
             <ExternalLink className="h-3 w-3" />
           </div>
         </div>
