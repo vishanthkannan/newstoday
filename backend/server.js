@@ -19,7 +19,7 @@ const app = express();
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://your-frontend-domain.com']
+    ? ['https://newstoday-kappa.vercel.app']
     : [/^http:\/\/localhost:\d+$/],
   credentials: true
 }));
