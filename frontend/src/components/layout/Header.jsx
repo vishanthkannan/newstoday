@@ -135,7 +135,7 @@ const Header = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search news..."
-                className="bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:outline-none w-64 shadow-sm"
+                className="bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:outline-none w-40 md:w-64 shadow-sm"
               />
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
             </form>
@@ -205,20 +205,20 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
-                <Link
-                  to="/login"
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-lg"
-                >
-                  Sign Up
-                </Link>
-              </div>
+              <div className="hidden md:flex items-center space-x-2">
+                  <Link
+                    to="/login"
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-lg"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
             )}
 
             {/* Mobile Menu Button */}
@@ -278,6 +278,25 @@ const Header = () => {
                 </option>
               ))}
             </select>
+            {/* Mobile Auth Links */}
+            {!user && (
+              <div className="flex w-full space-x-2">
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center bg-transparent text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors border border-gray-300 dark:border-gray-600"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center bg-primary-600 hover:bg-primary-700 text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors shadow-sm"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </div>
