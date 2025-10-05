@@ -1,0 +1,31 @@
+nohup: ignoring input
+🚀 NewsFlow API server running on port 5001
+📊 Health check: http://localhost:5001/api/health
+Connected to MongoDB
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=entertainment&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=entertainment&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=technology&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=business&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=sports&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=sports&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=health&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=entertainment&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=science&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&country=us
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=health&country=in
+GNews API Request: /api/v4/top-headlines?apikey=57ab362a0b082092f418a92e64e277d5&lang=en&max=20&category=health&country=jp
