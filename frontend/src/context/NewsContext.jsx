@@ -18,7 +18,7 @@ export const NewsProvider = ({ children }) => {
   const latestRequestId = useRef(0);
   const controllerRef = useRef(null);
 
-  const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const fetchNews = async (category = 'general', country = 'us', query = '') => {
     // cancel any previous in-flight request
