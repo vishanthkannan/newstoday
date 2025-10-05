@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useNews } from '../../context/NewsContext';
@@ -38,6 +38,21 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+  const [headerTopOffset, setHeaderTopOffset] = useState(0);
+
+  useEffect(() => {
+    const setOffset = () => {
+      if (headerRef.current) {
+        // Use offsetHeight to get the computed header height in pixels
+        setHeaderTopOffset(headerRef.current.offsetHeight || 0);
+      }
+    };
+
+    setOffset();
+    window.addEventListener('resize', setOffset);
+    return () => window.removeEventListener('resize', setOffset);
+  }, []);
 
   const handleCategoryChange = (categoryId, categoryValue) => {
     setActiveCategory(categoryId);
@@ -78,7 +93,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-dark-300/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700/50 transition-colors duration-300">
+  <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-dark-300/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700/50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -304,7 +319,9 @@ const Header = () => {
       {/* Click overlay to close menus */}
       {(userMenuOpen || mobileMenuOpen) && (
         <div
-          className="fixed inset-0 z-40"
+          // overlay starts below the header so header controls remain clickable
+          className="fixed left-0 right-0 bottom-0 z-30"
+          style={{ top: headerTopOffset }}
           onClick={() => {
             setUserMenuOpen(false);
             setMobileMenuOpen(false);
